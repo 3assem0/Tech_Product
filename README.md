@@ -24,7 +24,7 @@ This marketing landing page is designed to clearly communicate a product's value
 - 🎨 Theme toggle (Light/Dark Mode) using JavaScript
 - 🔳 Clean grid structure using **Flexbox** or **CSS Grid**
 - 🎯 Clear CTAs, icons, and consistent styling
-- 📦 Optionally styled with **Bootstrap** or **TailwindCSS**
+- 📦 Styled with **TailwindCSS**
 
 ---
 
@@ -36,7 +36,7 @@ This marketing landing page is designed to clearly communicate a product's value
 | `CSS` | Styling and layout |
 | `JavaScript` | Interactivity & theme toggle |
 | `Flexbox/Grid` | Responsive layout |
-| `Bootstrap` or `TailwindCSS` (optional) | Utility-first design system |
+| `TailwindCSS`  | Utility-first design system |
 
 ---
 
