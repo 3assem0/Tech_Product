@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnovateTech - Your Ultimate Solution</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Light mode styles */
+        html.light {
+            background-color: #ffffff; /* Pure white for overall background */
+            color: #1f2937; /* Dark gray for main text */
+        }
+        html.light .bg-hero-section {
+            background-color: #1f2937; /* Dark gray for hero in light mode */
+            color: #ffffff; /* White text for hero in light mode */
+        }
+        html.light .bg-section-primary { /* For Features, Pricing */
+            background-color: #f9fafb; /* Light gray for alternating sections */
+        }
+        html.light .bg-section-secondary { /* For Testimonials */
+            background-color: #ffffff; /* White for other sections */
+        }
+        html.light .bg-cta-section {
+            background-color: #1f2937; /* Dark gray for CTA in light mode */
+            color: #ffffff; /* White text for CTA in light mode */
+        }
+        html.light .bg-footer-section {
+            background-color: #f9fafb; /* Light gray for footer */
+            color: #4b5563; /* Darker gray for footer text */
+        }
+        html.light .bg-card {
+            background-color: #ffffff;
+            border-color: #e5e7eb; /* Light gray border */
+        }
+        html.light .text-primary {
+            color: #1d4ed8; /* Blue-700 for main headings/accents */
+        }
+        html.light .btn-primary {
+            background-color: #2563eb; /* Blue-600 for buttons */
+            color: #ffffff;
+        }
+        html.light .btn-primary:hover {
+            background-color: #1d4ed8; /* Blue-700 on hover */
+        }
+        html.light .toggle-bg {
+            background-color: #e5e7eb; /* Light gray toggle background */
+        }
+        html.light .toggle-circle {
+            background-color: #ffffff;
+            transform: translateX(2px);
+        }
+        html.light .navbar-bg {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        html.light .navbar-link {
+            color: #4b5563;
+        }
+        html.light .navbar-link:hover {
+            color: #1d4ed8;
+        }
+
+
+        /* Dark mode styles */
+        html.dark {
+            background-color: #111827; /* Darkest gray for overall background */
+            color: #e5e7eb; /* Light gray for main text */
+        }
+        html.dark .bg-hero-section {
+            background-color: #111827; /* Darkest gray for hero in dark mode */
+            color: #e5e7eb; /* Light text for hero in dark mode */
+        }
+        html.dark .bg-section-primary { /* For Features, Pricing */
+            background-color: #1f2937; /* Darker gray for alternating sections */
+        }
+        html.dark .bg-section-secondary { /* For Testimonials */
+            background-color: #111827; /* Darkest gray for other sections */
+        }
+        html.dark .bg-cta-section {
+            background-color: #111827; /* Darkest gray for CTA in dark mode */
+            color: #e5e7eb; /* Light text for CTA in dark mode */
+        }
+        html.dark .bg-footer-section {
+            background-color: #1f2937; /* Darker gray for footer */
+            color: #9ca3af; /* Lighter gray for footer text */
+        }
+        html.dark .bg-card {
+            background-color: #1f2937; /* Darker card background */
+            border-color: #374151; /* Darker gray border */
+        }
+        html.dark .text-primary {
+            color: #60a5fa; /* Blue-400 for dark mode headings/accents */
+        }
+        html.dark .btn-primary {
+            background-color: #3b82f6; /* Blue-500 for dark mode buttons */
+            color: #ffffff;
+        }
+        html.dark .btn-primary:hover {
+            background-color: #2563eb; /* Blue-600 on hover */
+        }
+        html.dark .toggle-bg {
+            background-color: #374151; /* Dark gray toggle background */
+        }
+        html.dark .toggle-circle {
+            background-color: #111827;
+            transform: translateX(22px);
+        }
+        html.dark .navbar-bg {
+            background-color: #111827;
+            border-bottom: 1px solid #374151;
+        }
+        html.dark .navbar-link {
+            color: #9ca3af;
+        }
+        html.dark .navbar-link:hover {
+            color: #60a5fa;
+        }
+
+
+        .toggle-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .toggle-bg {
+            width: 44px;
+            height: 24px;
+            border-radius: 9999px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 2px;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-icon {
+            position: absolute;
+            font-size: 0.8rem;
+            line-height: 1;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: opacity 0.3s ease;
+        }
+        .toggle-icon.sun {
+            left: 5px;
+        }
+        .toggle-icon.moon {
+            right: 5px;
+        }
+        html.light .toggle-icon.sun {
+            opacity: 1;
+        }
+        html.light .toggle-icon.moon {
+            opacity: 0;
+        }
+        html.dark .toggle-icon.sun {
+            opacity: 0;
+        }
+        html.dark .toggle-icon.moon {
+            opacity: 1;
+        }
+
+        /* Hero Section Blob Animation (subtler) */
+        @keyframes blob {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(20px, -30px) scale(1.05);
+            }
+            66% {
+                transform: translate(-15px, 15px) scale(0.98);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+        .animate-blob {
+            animation: blob 8s infinite cubic-bezier(0.42, 0, 0.58, 1);
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Hero Text Fade-in Animation */
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.98) translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .animate-fadeInScale {
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+        .animate-fadeInScale-delay-300 {
+            animation-delay: 0.3s;
+        }
+        .animate-fadeInScale-delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        /* Pricing "Most Popular" subtle pulse */
+        @keyframes pulse-subtle {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.03);
+                opacity: 0.95;
+            }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 2.5s infinite ease-in-out;
+        }
+
+        /* Mobile Nav Menu */
+        .mobile-nav-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%; /* Position below the navbar */
+            left: 0;
+            width: 100%;
+            background-color: inherit; /* Inherit background from navbar */
+            border-top: 1px solid; /* Inherit border color */
+            padding: 1rem 0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 40; /* Below fixed toggle, above content */
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .mobile-nav-menu.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50 flex items-center space-x-2">
+        <div id="theme-toggle" class="toggle-bg">
+            <div class="toggle-circle shadow-md"></div>
+            <i class="fas fa-sun toggle-icon sun text-yellow-500"></i>
+            <i class="fas fa-moon toggle-icon moon text-gray-400"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section (adjusted padding-top as no fixed navbar) -->
+    <section class="relative h-screen flex items-center justify-center text-center px-4 py-16 overflow-hidden bg-hero-section transition-colors duration-300">
+        <!-- Background elements for visual interest -->
+        <div class="absolute inset-0 z-0 opacity-10">
+            <div class="absolute w-72 h-72 bg-gray-700 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute w-72 h-72 bg-gray-600 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000 bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2"></div>
+            <div class="absolute w-72 h-72 bg-gray-500 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-8 drop-shadow-lg animate-fadeInScale">
+                InnovateTech: Precision. Power. Progress.
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-12 opacity-95 animate-fadeInScale animate-fadeInScale-delay-300">
+                Streamline your operations, empower your team, and achieve more with our intuitive SaaS platform.
+            </p>
+            <a href="#cta" class="inline-block bg-blue-600 text-white font-bold py-5 px-12 rounded-full text-lg sm:text-xl shadow-xl hover:bg-blue-700 transform hover:scale-105 transition duration-300 ease-in-out animate-fadeInScale animate-fadeInScale-delay-600 border-2 border-transparent hover:border-blue-300">
+                Start Your Free Trial
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-4 bg-section-primary transition-colors duration-300">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-bold mb-6 text-primary">Core Features Designed For You</h2>
+            <p class="text-lg sm:text-xl mb-20 text-gray-700 dark:text-gray-300">
+                Explore the powerful capabilities that make InnovateTech indispensable for your business.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Feature Card 1 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transform transition duration-500 hover:scale-102 hover:shadow-xl hover:border-blue-400">
+                    <div class="text-7xl text-blue-600 dark:text-blue-400 mb-8">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Advanced Analytics</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Gain deep insights into your operations with powerful, easy-to-understand dashboards.
+                    </p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transform transition duration-500 hover:scale-102 hover:shadow-xl hover:border-blue-400">
+                    <div class="text-7xl text-gray-700 dark:text-gray-300 mb-8">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Robust Security</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Your data is protected with industry-leading encryption and security protocols.
+                    </p>
+                </div>
+                <!-- Feature Card 3 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transform transition duration-500 hover:scale-102 hover:shadow-xl hover:border-blue-400">
+                    <div class="text-7xl text-blue-600 dark:text-blue-400 mb-8">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Scalable Cloud Storage</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Securely store and access your files from anywhere, scaling with your needs.
+                    </p>
+                </div>
+                <!-- Feature Card 4 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transform transition duration-500 hover:scale-102 hover:shadow-xl hover:border-blue-400">
+                    <div class="text-7xl text-gray-700 dark:text-gray-300 mb-8">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Collaborative Tools</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Foster teamwork with integrated features designed for seamless collaboration.
+                    </p>
+                </div>
+                <!-- Feature Card 5 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transform transition duration-500 hover:scale-102 hover:shadow-xl hover:border-blue-400">
+                    <div class="text-7xl text-blue-600 dark:text-blue-400 mb-8">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Cross-Platform Access</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Access your work on any device, ensuring productivity on the go.
+                    </p>
+                </div>
+                <!-- Feature Card 6 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transform transition duration-500 hover:scale-102 hover:shadow-xl hover:border-blue-400">
+                    <div class="text-7xl text-gray-700 dark:text-gray-300 mb-8">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Dedicated Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Receive prompt and expert assistance from our dedicated support team.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 px-4 bg-section-secondary transition-colors duration-300">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-bold mb-6 text-primary">What Our Users Say</h2>
+            <p class="text-lg sm:text-xl mb-20 text-gray-700 dark:text-gray-300">
+                Hear from businesses and individuals who have transformed their operations with InnovateTech.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Testimonial Card 1 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700">
+                    <p class="text-xl italic mb-8 text-gray-700 dark:text-gray-300 leading-relaxed">
+                        "InnovateTech has completely streamlined our workflow. The performance is incredible, and the support team is top-notch!"
+                    </p>
+                    <div class="flex items-center justify-center">
+                        <img src="https://placehold.co/80x80/60A5FA/FFFFFF?text=JD" alt="John Doe" class="w-20 h-20 rounded-full mr-5 border-4 border-blue-500 ring-2 ring-blue-300 transition-all duration-300 hover:ring-4">
+                        <div>
+                            <p class="font-semibold text-xl">John Doe</p>
+                            <p class="text-md text-gray-500 dark:text-gray-400">CEO, TechSolutions</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Card 2 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700">
+                    <p class="text-xl italic mb-8 text-gray-700 dark:text-gray-300 leading-relaxed">
+                        "The analytics feature is a game-changer for us. We've gained insights we never thought possible, leading to better decisions."
+                    </p>
+                    <div class="flex items-center justify-center">
+                        <img src="https://placehold.co/80x80/3B82F6/FFFFFF?text=JS" alt="Jane Smith" class="w-20 h-20 rounded-full mr-5 border-4 border-blue-500 ring-2 ring-blue-300 transition-all duration-300 hover:ring-4">
+                        <div>
+                            <p class="font-semibold text-xl">Jane Smith</p>
+                            <p class="text-md text-gray-500 dark:text-gray-400">Marketing Director, GlobalCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Card 3 -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700">
+                    <p class="text-xl italic mb-8 text-gray-700 dark:text-gray-300 leading-relaxed">
+                        "Security was our top concern, and InnovateTech delivered. We feel completely secure knowing our data is protected."
+                    </p>
+                    <div class="flex items-center justify-center">
+                        <img src="https://placehold.co/80x80/2563EB/FFFFFF?text=MB" alt="Michael Brown" class="w-20 h-20 rounded-full mr-5 border-4 border-blue-500 ring-2 ring-blue-300 transition-all duration-300 hover:ring-4">
+                        <div>
+                            <p class="font-semibold text-xl">Michael Brown</p>
+                            <p class="text-md text-gray-500 dark:text-gray-400">CTO, SecureNet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-4 bg-section-primary transition-colors duration-300">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-bold mb-6 text-primary">Simple & Transparent Pricing</h2>
+            <p class="text-lg sm:text-xl mb-20 text-gray-700 dark:text-gray-300">
+                Choose the plan that best fits your needs and budget. No hidden fees.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-stretch">
+                <!-- Pricing Card 1: Starter -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between transform transition duration-500 hover:scale-102 hover:shadow-xl">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Starter</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-8">Perfect for individuals and small projects.</p>
+                        <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8">
+                            $19<span class="text-xl font-medium text-gray-500">/month</span>
+                        </div>
+                        <ul class="text-left space-y-4 mb-10 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> 1 User</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> 5GB Storage</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Basic Analytics</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Email Support</li>
+                        </ul>
+                    </div>
+                    <a href="#cta" class="btn-primary inline-block py-4 px-10 rounded-xl font-semibold text-lg hover:shadow-lg transition duration-300 ease-in-out">
+                        Choose Starter
+                    </a>
+                </div>
+
+                <!-- Pricing Card 2: Pro (Featured) -->
+                <div class="bg-card p-10 rounded-3xl shadow-2xl border-4 border-blue-500 flex flex-col justify-between transform transition duration-500 hover:scale-102 relative">
+                    <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white text-sm font-bold px-5 py-1.5 rounded-full shadow-md animate-pulse-subtle">
+                        Most Popular
+                    </span>
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Pro</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-8">Ideal for growing teams and businesses.</p>
+                        <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8">
+                            $49<span class="text-xl font-medium text-gray-500">/month</span>
+                        </div>
+                        <ul class="text-left space-y-4 mb-10 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Unlimited Users</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> 50GB Storage</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Advanced Analytics</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Priority Support</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Custom Integrations</li>
+                        </ul>
+                    </div>
+                    <a href="#cta" class="btn-primary inline-block py-4 px-10 rounded-xl font-semibold text-lg hover:shadow-lg transition duration-300 ease-in-out">
+                        Choose Pro
+                    </a>
+                </div>
+
+                <!-- Pricing Card 3: Enterprise -->
+                <div class="bg-card p-10 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between transform transition duration-500 hover:scale-102 hover:shadow-xl">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Enterprise</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-8">For large organizations with complex needs.</p>
+                        <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8">
+                            Custom
+                        </div>
+                        <ul class="text-left space-y-4 mb-10 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Unlimited Everything</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Dedicated Account Manager</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> On-Premise Option</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> Advanced Security</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i> SLA Guaranteed</li>
+                        </ul>
+                    </div>
+                    <a href="#cta" class="btn-primary inline-block py-4 px-10 rounded-xl font-semibold text-lg hover:shadow-lg transition duration-300 ease-in-out">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section id="cta" class="py-24 px-4 bg-cta-section transition-colors duration-300">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+                Ready to Boost Your Productivity?
+            </h2>
+            <p class="text-xl sm:text-2xl mb-12 opacity-95">
+                Join thousands of satisfied customers who are already leveraging InnovateTech to achieve their goals.
+            </p>
+            <a href="#" class="inline-block bg-blue-600 text-white font-bold py-5 px-12 rounded-full text-xl sm:text-2xl shadow-xl hover:bg-blue-700 transform hover:scale-105 transition duration-300 ease-in-out border-2 border-transparent hover:border-blue-300">
+                Get Started Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 text-center bg-footer-section transition-colors duration-300">
+        <p>&copy; 2023 InnovateTech. All rights reserved.</p>
+        <div class="mt-6 flex justify-center space-x-8 text-2xl">
+            <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition duration-200"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition duration-200"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition duration-200"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle JavaScript
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement; // Refers to the <html> tag
+
+        // Check for saved theme preference in localStorage
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.classList.add(currentTheme);
+        } else {
+            // Default to light mode if no preference is saved
+            htmlElement.classList.add('light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('light')) {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
